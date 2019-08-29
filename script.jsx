@@ -30,7 +30,8 @@ class List extends React.Component {
       console.log("rendering");
       return (
         <div className="list">
-          <input onChange={(event)=>{this.changeHandler(event)}}/>
+        <p> Typed: {this.state.word} </p>
+          {this.state.word.length <1 ? <input className= "warning" onChange={(event)=>{this.changeHandler(event)}}/> :<input onChange={(event)=>{this.changeHandler(event)}}/> }
           <button onClick={()=>{this.addItem()}}>add item</button>
           <ul>
             {itemElements}
