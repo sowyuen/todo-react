@@ -1,10 +1,19 @@
+class Task extends React.Component {
+    render(){
+        return (
+            <li>{this.props.item}</li>
+            )
+    }
+}
+
 class List extends React.Component {
   constructor(){
     super()
 
     this.state = {
       word:"",
-      list : []
+      list : [],
+      keyCount: 0
     }
   }
 
@@ -22,19 +31,21 @@ class List extends React.Component {
 
   render() {
       // render the list with a map() here
-      let list = this.state.list;
-      let itemElements = list.map((task) => {
-        return <li>{`${task}`}</li>
-      });
+      const list = this.state.list.map((task, taskIndex) => {
+        return(
+            <Task key={taskIndex} item={task}/>
+        );
+      })
 
       console.log("rendering");
       return (
-        <div className="list">
+        <div className="justify-content-center text-center">
+        <h1> To-do List </h1>
         <p> Typed: {this.state.word} </p>
-          {this.state.word.length <1 ? <input className= "warning" onChange={(event)=>{this.changeHandler(event)}}/> :<input onChange={(event)=>{this.changeHandler(event)}}/> }
+          {this.state.word.length <2 ? <input className= "warning" onChange={(event)=>{this.changeHandler(event)}}/> :<input onChange={(event)=>{this.changeHandler(event)}}/> }
           <button onClick={()=>{this.addItem()}}>add item</button>
           <ul>
-            {itemElements}
+            {list}
           </ul>
         </div>
       );
